@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition template="/_template.xhtml">
+		<ui:define name="corpo">
+			<h:form id="usuarioForm" >
+				<p:panel header="Dados usuario">
+					<p:messages id="messages" showDetail="true" autoUpdate="true"/>
+						<h:panelGrid columns="2" id="matchGrid">
+						
+						<h:outputLabel value="Nome:" rendered="true" />
+						<h:inputText value="#{usuarioBean.usuario.nome}" />
+
+						<h:outputLabel value="Login:" />
+						<h:inputText value="#{usuarioBean.usuario.login}"/>
+				
+						<h:outputLabel for="pwd1" value="Senha:"/>
+						<p:password id="pwd1" value="#{usuarioBean.usuario.senha}" match="pwd2" label="Senha" required="true" />
+					
+						<h:outputLabel for="pwd2" value="Confirmar senha:"/>
+						<p:password id="pwd2" value="#{usuarioBean.usuario.confirmaSenha}" label="Confirmar senha" required="true" />
+				
+						<h:commandButton value="Gravar" update="matchGrid" action="#{usuarioBean.grava}"/>
+						
+					
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

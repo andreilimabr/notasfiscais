@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition template="/_template.xhtml">
+		<ui:define name="corpo">
+			<h:form id="usuarioForm" >
+					<p:panel header="Dados clientes">
+					<p:messages id="messages" showDetail="true" autoUpdate="true"/>
+						<h:panelGrid columns="2" id="matchGrid">
+						
+						<h:outputLabel value="Nome:" for="nome" />
+						<h:inputText id="nome" value="#{clienteBean.cliente.nome}" required="true"/>
+						
+						
+						
+						<h:outputText value="Tipo de documento: *" for="tipodocumento"/>
+						<p:selectOneMenu id="tipodocumento" value="#{clienteBean.cliente.tipodocumento}" rendered="true">
+							<f:selectItem itemLabel="Selecione"/>
+							<f:selectItem itemLabel="CNPJ"  itemValue="cnpj"></f:selectItem>
+							<f:selectItem itemLabel="CPF" itemValue="cpf"></f:selectItem>
+							<p:ajax update="mask"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel  /> 
+						<p:inputMask id="mask" mask="#{clienteBean.cliente.tipodocumento=='cnpj'? '99.999.999/9999-99' :
+							'999.999.999-99'}" value="#{clienteBean.cliente.numeroDocumento}" >
+						</p:inputMask>
+						
+						<h:outputText value="Data de cadastro:" />
+						<p:calendar pattern="dd/MM/yyyy" value="#{clienteBean.cliente.data.time}" />
+					
+						<h:commandButton value="Grava" action="#{clienteBean.grava}"/>
+						
+					
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+	
+</html>

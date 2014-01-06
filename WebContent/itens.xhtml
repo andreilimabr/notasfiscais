@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+	  <ui:composition template="/_template.xhtml">
+		<ui:define name="corpo">
+		<fieldset>
+			<legend>Dados do item</legend>
+					
+					<h:outputLabel value="produto:"/>
+					<p:selectOneMenu value="#{notaFiscalBean.idProduto}">
+						<f:selectItems value="#{produtoBean.produtos}" var="produto"
+							itemValue="#{produto.id}" itemLabel="#{produto.nome}"/>
+					</p:selectOneMenu>
+					<br />
+					<h:outputLabel value="Quantidade"/>
+					<h:inputText value="#{notaFiscalBean.item.quantidade}" />
+					
+					<h:commandButton value="Adicionar item" action="#{notaFiscalBean.guardaItem}" />
+						
+				</fieldset>
+				
+				
+				<p:dataTable  var="item" value="#{notaFiscalBean.nota.itens}" 
+				paginator="true" rows="10" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+				{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
+				<f:facet name="header">  
+            		Itens da nota fiscal
+        		</f:facet> 
+				 <p:column headerText="Produto">
+					#{item.produto.nome}
+				</p:column>
+				
+				<p:column headerText="Preço">
+					<h:outputText value="#{item.valorUnitario}">
+						<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+					
+				<p:column headerText="Quantidade">
+					#{item.quantidade}
+				</p:column>
+				
+				<p:column headerText="Valor">
+					<h:outputText value="#{item.total}">
+						<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				
+				</p:dataTable>
+				<h:commandButton value="Salvar" action="#{notaFiscalBean.adiciona}"/>	
+		
+		</ui:define>
+	</ui:composition>
+</html>

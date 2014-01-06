@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+    xmlns="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit name="produto"
+        transaction-type="RESOURCE_LOCAL">
+       <provider>org.hibernate.ejb.HibernatePersistence</provider>
+       
+       <class>br.com.caelum.notasfiscais.modelo.Item</class>
+       <class>br.com.caelum.notasfiscais.modelo.NotaFiscal</class>
+       <class>br.com.caelum.notasfiscais.modelo.Produto</class>
+       <class>br.com.caelum.notasfiscais.modelo.Usuario</class>
+       <class>br.com.caelum.notasfiscais.modelo.Cliente</class>
+      
+       
+       
+       
+        <properties>
+		      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/notasfiscais2"/>
+		      <property name="javax.persistence.jdbc.user" value="root"/>
+		      <property name="javax.persistence.jdbc.password" value="1234"/>
+		      
+		      <property name="hibernate.hbm2ddl.auto" value="update"/>
+		      <property name="hibernate.show_sql" value="true" />
+		      
+		      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+    	</properties>
+    </persistence-unit>
+</persistence>

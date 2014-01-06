@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif] -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html" 
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	<ui:composition template="/_template.xhtml">
+		<ui:define name="corpo">
+			<h:form id="formProduto">
+							
+				<fieldset>
+					<legend>Dados do produto</legend>
+						<h:inputHidden id="id" value="#{produtoBean.produto.id}"/>
+						
+						<h:outputLabel value="Nome:" for="nome"/>
+						<h:inputText id="nome" value="#{produtoBean.produto.nome}"/>
+					
+						<h:outputLabel value="Descrição:" for="descricao"/>
+						<h:inputTextarea id="descricao" value="#{produtoBean.produto.descricao}"/>
+						
+						<h:outputLabel value="Preço:" for="preco"/>
+						<h:inputText id="preco" value="#{produtoBean.produto.preco}"/>
+						
+						<h:commandButton value="Gravar" action="#{produtoBean.grava}">
+							<f:ajax render=":formProduto :tabela" execute="@form"/> <!--render: atualiza dados a tabela -->
+						</h:commandButton>
+						<h:commandButton value="Cancelar" action="produto" immediate="true"/>
+				</fieldset>
+			</h:form>
+		
+<!-- 		<h2>Listagem de Produtos</h2> --> 
+			<h:form id="tabela">
+	
+				<p:dataTable  var="produto" value="#{produtoBean.produtos}" 
+				paginator="true" rows="10" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+				{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
+				<f:facet name="header">  
+            		Listagem de Produtos 
+        		</f:facet>  
+					<p:column>
+						<f:facet name="header">Nome</f:facet> #{produto.nome}
+					</p:column>
+						
+					<p:column>
+						<f:facet name="header">Descrição</f:facet> #{produto.descricao}
+					</p:column>
+						
+					<p:column>
+						<f:facet name="header">Preço</f:facet> #{produto.preco}
+					</p:column>
+						<p:column>
+							<f:facet name="header"></f:facet>
+							<h:commandLink action="#{produtoBean.remove(produto)}" 
+								value="Remover">
+								<f:ajax render="@form"/>
+							</h:commandLink>
+						</p:column>
+						<p:column>
+							<f:facet name="header"></f:facet>
+							<p:commandLink value="Alterar">
+								<f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}" />
+									<f:ajax render=":formProduto"/>
+							</p:commandLink>
+						</p:column>
+				</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

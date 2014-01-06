@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<title>Sistema de Notas Fiscais</title>
+<h:outputStylesheet name="style.css" library="css"/>
+</h:head>
+<h:body>
+	<div id="cabecalho">
+		<h:graphicImage library="imagens" name="logo-uber.png" id="logoCompany" />
+	</div>
+	
+	<div id="usuarioLogado">
+		<h:form rendered="#{loginBean.logado}">
+		Logado como: #{loginBean.usuario.login}
+			<h:commandLink value="(Logout)" action="#{loginBean.logout}"/>
+		</h:form>
+	</div>
+
+	<div id="conteudo">
+		<h:form rendered="#{loginBean.logado}">
+			<p:menubar>
+				<p:menuitem value="Produtos" url="produto.xhtml" icon="ui-icon ui-icon-document"/>
+				<p:submenu label="Cadastro" icon="ui-icon ui-icon-person">
+					<p:submenu label="Usuarios">
+						<p:menuitem value="Novo" url="usuario.xhtml" icon="ui-icon ui-icon-document"/>
+					</p:submenu>
+					<p:submenu label="Clientes"> 
+						<p:menuitem value="Novo" url="clientes.xhtml" icon="ui-icon ui-icon-document"/>
+					</p:submenu>
+				</p:submenu>
+				<p:submenu label="Notas Fiscais">
+					<p:menuitem value="Cadastro" url="notafiscal.xhtml" icon="ui-icon ui-icon-document"/>
+					<p:menuitem value="Listagem" url="listanotas.xhtml"/>
+				</p:submenu>
+				<p:menuitem value="Sair" action="#{loginBean.logout}" icon="ui-icon-circle-close"/>
+			</p:menubar>
+		</h:form>
+		<ui:insert name="corpo"/>
+	</div>   
+	<div id="rodape">
+		Copyright 2013. Todos os Direitos reservados a André
+	</div>
+	
+</h:body>
+</html>
