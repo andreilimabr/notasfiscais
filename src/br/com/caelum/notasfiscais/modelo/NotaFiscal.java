@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -18,17 +20,11 @@ public class NotaFiscal {
 	private Long id;
 	private String cnpj;
 	private String nome;
+	@Temporal(TemporalType.DATE)
 	private Calendar data = Calendar.getInstance();
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="notaFiscal")
 	private List<Item> itens = new ArrayList<Item>();
 	
-	
-	public List<Item> getItens() {
-		return itens;
-	}
-	public void setItens(List<Item> itens) {
-		this.itens = itens;
-	}
 	public String getNome() {
 		return nome;
 	}
@@ -54,6 +50,13 @@ public class NotaFiscal {
 	}
 	public void setData(Calendar data) {
 		this.data = data;
+	}
+
+	public List<Item> getItens() {
+		return itens;
+	}
+	public void setItens(List<Item> itens) {
+		this.itens = itens;
 	}
 	
 

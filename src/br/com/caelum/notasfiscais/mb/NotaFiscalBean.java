@@ -1,7 +1,10 @@
 package br.com.caelum.notasfiscais.mb;
 
+import java.io.Serializable;
+
 import javax.enterprise.context.Conversation;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 
@@ -12,14 +15,15 @@ import br.com.caelum.notasfiscais.modelo.NotaFiscal;
 import br.com.caelum.notasfiscais.modelo.Produto;
 
 @ManagedBean
-public class NotaFiscalBean {
+@ViewScoped
+public class NotaFiscalBean implements Serializable{
 	
 	private NotaFiscal nota = new NotaFiscal();
 	private Cliente cliente = new Cliente();
 	private Item item = new Item();
 	private Long idProduto;
-	@Inject
-	private Conversation conv;
+
+	
 	
 	
 
@@ -46,8 +50,8 @@ public class NotaFiscalBean {
 		this.nota.getItens().add(this.item);
 		this.item.setNotaFiscal(this.nota);
 		
-		
 	}
+	
 	
 	
 	public Long getIdProduto() {

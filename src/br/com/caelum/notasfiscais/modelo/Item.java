@@ -1,22 +1,18 @@
 package br.com.caelum.notasfiscais.modelo;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import br.com.caelum.notasfiscais.modelo.Cliente;
-import br.com.caelum.notasfiscais.modelo.NotaFiscal;
-import br.com.caelum.notasfiscais.modelo.Produto;
 
 @Entity
-public class Item {
+public class Item implements Serializable {
 	@Id @GeneratedValue
 	private Long id;
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne
 	private NotaFiscal notaFiscal;
 
 	@ManyToOne
@@ -24,6 +20,7 @@ public class Item {
 	
 	@ManyToOne
 	private Cliente cliente;
+	
 	private Integer quantidade;
 	private Double valorUnitario;
 	
@@ -58,17 +55,17 @@ public class Item {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
 	
 	public Double getTotal() {
 		if (quantidade != null && valorUnitario != null)
 			return quantidade * valorUnitario;
 		else
 			return null;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 }

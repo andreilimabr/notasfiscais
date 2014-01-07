@@ -3,10 +3,9 @@ package br.com.caelum.notasfiscais.modelo;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
-public class Produto {
+public class Produto implements Cloneable {// para não deixar mexer diretamente no objeto, mexer numa copia dele e então persistir no banco, criar o metodo clone public conforme abaixo
 	
 	@Id
 	@GeneratedValue
@@ -14,14 +13,7 @@ public class Produto {
 	private String nome;
 	private String descricao;
 	private Double preco;
-//	private Item item;
-	
-	/*public Item getItem() {
-		return item;
-	}
-	public void setItem(Item item) {
-		this.item = item;
-	}*/
+
 	public String getNome() {
 		return nome;
 	}
@@ -45,6 +37,11 @@ public class Produto {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
 	}
 
 }
