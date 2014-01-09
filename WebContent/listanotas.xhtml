@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition template="/_template.xhtml">
+		<ui:define name="corpo">
+		
+		<h2>Listagem de Notas Fiscais</h2>
+		<h:form id="tabela">
+			<p:dataTable value="#{listaNotasBean.dataModel}" var="nf"
+			paginator="true" rows="5" lazy="true">
+			
+			<p:column headerText="Nome">
+				<h:outputText value="#{nf.cnpj"/>
+			
+			
+			</p:column>
+			
+			
+			</p:dataTable>
+		</h:form>
+		
+		</ui:define>
+	</ui:composition>
+</html>

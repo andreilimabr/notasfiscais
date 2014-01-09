@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.validator.constraints.Email;
 
 import br.com.caelum.notasfiscais.modelo.Produto;
-import br.com.caelum.notasfiscais.util.JPAUtil;
 
 public class DAO<T> {
 	private final Class<T> classe;

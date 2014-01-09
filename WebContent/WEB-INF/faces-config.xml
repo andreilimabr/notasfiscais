@@ -7,9 +7,9 @@
     version="2.0">
     
      <lifecycle>
-       <!--  <phase-listener> 
+         <phase-listener> 
             br.com.caelum.notasfiscais.listener.CicloDeVidaListener
-        </phase-listener>-->
+        </phase-listener>
 		  <phase-listener>
             br.com.caelum.notasfiscais.listener.Autorizador
         </phase-listener> 

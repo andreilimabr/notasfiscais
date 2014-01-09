@@ -12,25 +12,31 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 public class NotaFiscal {
 	@Id 
 	@GeneratedValue
 	private Long id;
+	
+	@NotEmpty
 	private String cnpj;
-	private String nome;
+
+	
 	@Temporal(TemporalType.DATE)
 	private Calendar data = Calendar.getInstance();
+	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="notaFiscal")
 	private List<Item> itens = new ArrayList<Item>();
 	
-	public String getNome() {
+	/*public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
+	}*/
 	
 	public Long getId() {
 		return id;

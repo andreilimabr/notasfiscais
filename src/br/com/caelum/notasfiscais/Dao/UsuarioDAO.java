@@ -5,7 +5,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.caelum.notasfiscais.modelo.Usuario;
-import br.com.caelum.notasfiscais.util.JPAUtil;
 
 public class UsuarioDAO {
 	public boolean existe(Usuario usuario) {

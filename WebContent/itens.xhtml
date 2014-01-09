@@ -8,9 +8,10 @@
 	  
 	  <ui:composition template="/_template.xhtml">
 		<ui:define name="corpo">
-		<fieldset>
-			<legend>Dados do item</legend>
-					
+			<h:form>
+				CNPJ Cliente: <h:outputText value="#{notaFiscalBean.nota.cnpj}" converter="cnpj" />
+				<fieldset>
+					<legend>Dados do item</legend>
 					<h:outputLabel value="produto:"/>
 					<p:selectOneMenu value="#{notaFiscalBean.idProduto}">
 						<f:selectItems value="#{produtoBean.produtos}" var="produto"
@@ -54,7 +55,7 @@
 				
 				</p:dataTable>
 				<h:commandButton value="Salvar" action="#{notaFiscalBean.adiciona}"/>	
-		
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </html>
