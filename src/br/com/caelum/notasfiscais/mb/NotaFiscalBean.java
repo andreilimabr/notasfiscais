@@ -3,6 +3,8 @@ package br.com.caelum.notasfiscais.mb;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.jboss.solder.logging.Logger;
 import org.primefaces.event.FlowEvent;
@@ -13,6 +15,7 @@ import br.com.caelum.notasfiscais.modelo.NotaFiscal;
 import br.com.caelum.notasfiscais.modelo.Produto;
 
 @ManagedBean
+@ViewScoped
 public class NotaFiscalBean implements Serializable{
 	
 	private NotaFiscal nota = new NotaFiscal();
@@ -34,11 +37,10 @@ public class NotaFiscalBean implements Serializable{
 	public NotaFiscal getNota() {
 		return nota;
 	}
-	public String adiciona(){
+	public void adiciona(ActionEvent actionEvent){
 		DAO<NotaFiscal> dao = new DAO<NotaFiscal>(NotaFiscal.class);
 		dao.adiciona(nota);
 		this.nota = new NotaFiscal();
-		return "nota-fical";
 		
 	}
 	public void guardaItem(){

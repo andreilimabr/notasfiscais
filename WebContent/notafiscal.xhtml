@@ -29,8 +29,50 @@
 				 	</p:tab>
 				 	
 				 	<p:tab id="itens" title="Itens">
-				 	
+						<p:panel header="Itens nota">
+							<h:panelGrid columns="2" columnClasses="label, value"> 
+							
+							<h:outputLabel value="produto:"/>
+							<p:selectOneMenu value="#{notaFiscalBean.idProduto}">
+								<f:selectItems value="#{produtoBean.produtos}" var="produto"
+									itemValue="#{produto.id}" itemLabel="#{produto.nome}"/>
+							</p:selectOneMenu>
+							
+							<h:outputLabel value="Quantidade"/>
+							<h:inputText value="#{notaFiscalBean.item.quantidade}" />
+							<h:commandButton value="Adicionar item" action="#{notaFiscalBean.guardaItem}" />
+							</h:panelGrid>
+						</p:panel>
 				 	</p:tab>
+				 	
+				 	<p:tab id="confirmacao" title="Confirmação">  
+            				<h:form>
+								<p:dataTable var="item" value="#{notaFiscalBean.nota.itens}" 
+									paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
+								
+								 <p:column headerText="Produto">
+									#{item.produto.nome}
+								</p:column>
+								
+								<p:column headerText="Preço">
+									<h:outputText value="#{item.valorUnitario}">
+										<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"/>
+									</h:outputText>
+								</p:column>
+									
+								<p:column headerText="Quantidade">
+									#{item.quantidade}
+								</p:column>
+								
+								<p:column headerText="Valor">
+									<h:outputText value="#{item.total}">
+										<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"/>
+									</h:outputText>
+								</p:column>
+            				</p:dataTable>
+            			</h:form>
+            			<p:commandButton  actionistener="#{notaFiscalBean.adiciona}" value="Submit" update="growl" />
+            		</p:tab>
 				</p:wizard>
 			</h:form>
 		</ui:define>

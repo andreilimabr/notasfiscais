@@ -1,5 +1,6 @@
 package br.com.caelum.notasfiscais.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -16,12 +17,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
-public class NotaFiscal {
+public class NotaFiscal implements Serializable {
 	@Id 
 	@GeneratedValue
 	private Long id;
 	
-	@NotEmpty
 	private String cnpj;
 
 	
