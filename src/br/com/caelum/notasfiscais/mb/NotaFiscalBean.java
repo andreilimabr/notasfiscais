@@ -37,7 +37,7 @@ public class NotaFiscalBean implements Serializable{
 	public NotaFiscal getNota() {
 		return nota;
 	}
-	public void adiciona(ActionEvent actionEvent){
+	public void adiciona(ActionEvent event){
 		DAO<NotaFiscal> dao = new DAO<NotaFiscal>(NotaFiscal.class);
 		dao.adiciona(nota);
 		this.nota = new NotaFiscal();

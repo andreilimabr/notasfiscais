@@ -8,7 +8,7 @@
 	  
 	  <ui:composition template="/_template.xhtml">
 		<ui:define name="corpo">
-			<h:form>
+			<h:form id="form1">
 			 <p:growl id="growl" sticky="true" showDetail="true"/>
 				<p:wizard flowListener="#{notaFiscalBean.onFlowProcess}">
 					<p:tab id="nota" title="Nota">
@@ -46,11 +46,10 @@
 				 	</p:tab>
 				 	
 				 	<p:tab id="confirmacao" title="Confirmação">  
-            				<h:form>
-								<p:dataTable var="item" value="#{notaFiscalBean.nota.itens}" 
-									paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
+						<p:dataTable var="item" value="#{notaFiscalBean.nota.itens}" 
+							paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
 								
-								 <p:column headerText="Produto">
+								<p:column headerText="Produto">
 									#{item.produto.nome}
 								</p:column>
 								
@@ -70,8 +69,7 @@
 									</h:outputText>
 								</p:column>
             				</p:dataTable>
-            			</h:form>
-            			<p:commandButton  actionistener="#{notaFiscalBean.adiciona}" value="Submit" update="growl" />
+            				<p:commandButton  actionListener="#{notaFiscalBean.adiciona}" value="Submit" update="growl" />
             		</p:tab>
 				</p:wizard>
 			</h:form>
