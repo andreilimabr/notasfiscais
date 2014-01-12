@@ -23,11 +23,11 @@ public class DAO<T> {
 	public void adiciona(T t) {
 		//consegue a entity manager
 		EntityManager em = new JPAUtil().getEntityManager();
-		//abre a transação
+		//abre a transaï¿½ï¿½o
 		em.getTransaction().begin();
 		//persiste o objeto
 		em.persist(t);
-		//comita trasação
+		//comita trasaï¿½ï¿½o
 		em.getTransaction().commit();
 		//fecha o entity manager
 		em.close();
@@ -95,7 +95,7 @@ public class DAO<T> {
 		
 		return (int) result;
 	}
-
+	
 	
 
 }

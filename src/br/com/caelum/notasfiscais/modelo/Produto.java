@@ -2,15 +2,19 @@ package br.com.caelum.notasfiscais.modelo;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Produto implements Serializable {// para não deixar mexer diretamente no objeto, mexer numa copia dele e então persistir no banco, criar o metodo clone public conforme abaixo
+@Table(name = "produto")
+public class Produto implements Serializable {// para nï¿½o deixar mexer diretamente no objeto, mexer numa copia dele e entï¿½o persistir no banco, criar o metodo clone public conforme abaixo
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "produto_id")
 	private Long id;
 	private String nome;
 	private String descricao;

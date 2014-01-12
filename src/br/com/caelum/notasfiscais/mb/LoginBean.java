@@ -5,7 +5,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import sun.usagetracker.UsageTrackerClient;
 import br.com.caelum.notasfiscais.Dao.UsuarioDAO;
 import br.com.caelum.notasfiscais.modelo.Usuario;
 import br.com.caelum.notasfiscais.modelo.UsuarioLogado;
