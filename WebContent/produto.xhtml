@@ -34,16 +34,24 @@
 		
 <!-- 		<h2>Listagem de Produtos</h2> --> 
 			<h:form id="tabela">
+				
+				<p:dialog id="dialogImagens" position="top" widgetVar="dialogsImagens" modal="true">
+					<p:fileUpload fileUploadListener="#{produtoBean.processFileUpload}"
+						
+						label="Escolher" cancelLabel="Cancelar">
+						
+					</p:fileUpload>
+				</p:dialog>
 	
 				<p:dataTable  var="produto" value="#{produtoBean.produtos}" 
 				paginator="true" rows="10" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
 				{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="5,10,15">
+				rowsPerPageTemplate="5,10,15" emptyMessage="Nenhum produto cadastrado">
 				<f:facet name="header">  
             		Listagem de Produtos 
         		</f:facet>  
-					<p:column>
-						<f:facet name="header">Nome</f:facet> #{produto.nome}
+					<p:column headerText="Nome">
+						#{produto.nome}
 					</p:column>
 						
 					<p:column>
@@ -66,6 +74,14 @@
 								<f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}" />
 									<f:ajax render=":formProduto"/>
 							</p:commandLink>
+						</p:column>
+						<p:column>
+							<p:commandButton id="addButton" oncomplete="fotoDialog.show()" icon="ui-icon-plus"
+								title="Adicionar imagens">
+								<f:setPropertyActionListener target="#{produtoBean.produtoSelecionado}" value="#{produto}"/>
+							</p:commandButton>
+							<p:commandButton id="shoeButton" oncomplete="produtoDialog.show()" icon="ui-icon-search"
+								title="Visualizar imagens"/>
 						</p:column>
 				</p:dataTable>
 			</h:form>

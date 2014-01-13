@@ -12,20 +12,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="foto")
 public class Foto implements Serializable {
-	
 	@Id @GeneratedValue
-	@Column(name = "foto_id")
 	private Long id;
+	
 	@Lob
-	@Column(name = "foto_image", columnDefinition = "longlob")
 	private byte[] imagem;
-	@Column(name = "foto_ddescricao")
+	
 	private String descricao;
 	
 	@ManyToOne
-	@JoinColumn(name = "produto_id")
 	private Produto produto;
 
 	public Long getId() {
@@ -59,5 +55,6 @@ public class Foto implements Serializable {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+
 
 }

@@ -1,32 +1,19 @@
 package br.com.caelum.notasfiscais.mb;
 
-import java.awt.Event;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.persistence.EntityManager;
+import javax.faces.context.FacesContext;
 
+import org.apache.commons.fileupload.FileUpload;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-
-import com.sun.istack.internal.logging.Logger;
-
-import java.lang.Object;
 
 import br.com.caelum.notasfiscais.Dao.DAO;
-import br.com.caelum.notasfiscais.Dao.JPAUtil;
 import br.com.caelum.notasfiscais.modelo.Foto;
 import br.com.caelum.notasfiscais.modelo.Produto;
-
-import java.io.File;
 
 @RequestScoped
 @ManagedBean
@@ -36,19 +23,10 @@ public class ProdutoBean implements Serializable {
 	private Long produtoId;
 	private Produto produtoSelecionado = new Produto();
 	
-	private List<Foto> fotos = new ArrayList<Foto>();
 	private Foto foto = new Foto();
-	private StreamedContent imagem = new DefaultStreamedContent();
+	private List<Foto> fotos;
 	
 	
-	
-	public Produto getProduto() {
-		return this.produto;
-	}
-	
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
 	
 	 public String grava(){
 		 System.out.println("chamando o grava...");
@@ -81,28 +59,19 @@ public class ProdutoBean implements Serializable {
 	 public void salvaFoto(){
 		 DAO<Foto> dao = new DAO<Foto>(Foto.class);
 		 dao.adiciona(foto);
-		 this.foto = new Foto();
+		 
+		 FacesContext.getCurrentInstance().addMessage(null, 
+				 	new FacesMessage(FacesMessage.SEVERITY_INFO,
+				 			"Produto adicionado", "Produto adicionado"));
 	 }
-	 public void processFileUpload(FileUploadEvent uploadEvent) throws IOException {
-		 imagem = new DefaultStreamedContent(uploadEvent.getFile().getInputstream());
+	 public void processFileUpload(FileUploadEvent  uploadEvent){
 		 foto.setProduto(produtoSelecionado);
 		 foto.setImagem(uploadEvent.getFile().getContents());
 		 
-	 }
-	 public void criaArquivo(byte[] bs,String arquivo) throws IOException{
-		FileOutputStream fos = new FileOutputStream(arquivo);
-		fos.write(bs);
-		
-		fos.flush();
-		fos.close();
-	 }
-	 public void listaFotosProdutos(){
-		 
-		 DAO<Foto> dao = new DAO<Foto>(Foto.class);
-		 dao.buscaPorId(produtoSelecionado.getId());
-		 String nomeArquivo= foto.getId() + ".jnpg";
 		 
 	 }
+	
+	 
 	 
 	public Long getProdutoId() {
 		return produtoId;
@@ -110,6 +79,39 @@ public class ProdutoBean implements Serializable {
 	public void setProdutoId(Long produtoId) {
 		this.produtoId = produtoId;
 	}
+
+	public Produto getProdutoSelecionado() {
+		return produtoSelecionado;
+	}
+	public void setProdutoSelecionado(Produto produtoSelecionado) {
+		this.produtoSelecionado = produtoSelecionado;
+	}
+
+	public Produto getProduto() {
+		return this.produto;
+	}
+	
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+	public Foto getFoto() {
+		return foto;
+	}
+
+	public List<Foto> getFotos() {
+		return fotos;
+	}
+
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+
+	public void setFotos(List<Foto> fotos) {
+		this.fotos = fotos;
+	}
+
+	
 	
 
 }
